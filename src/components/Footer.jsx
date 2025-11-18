@@ -1,39 +1,42 @@
 import React from 'react'
+import { motion } from 'framer-motion'
 
 function Footer() {
   return (
-    <footer className="relative bg-slate-950 border-t border-white/10 text-white">
+    <footer className="relative border-t border-white/10 bg-slate-950 text-white">
       <div className="mx-auto max-w-6xl px-6 py-14">
         <div className="grid gap-8 sm:grid-cols-3">
-          <div>
-            <h4 className="text-sm font-semibold uppercase tracking-wider text-blue-200">Company</h4>
-            <ul className="mt-3 space-y-2 text-blue-100/90">
-              <li><a href="#" className="hover:text-white">About</a></li>
-              <li><a href="#" className="hover:text-white">Careers</a></li>
-              <li><a href="#" className="hover:text-white">Contact</a></li>
-            </ul>
-          </div>
-          <div>
-            <h4 className="text-sm font-semibold uppercase tracking-wider text-blue-200">Legal</h4>
-            <ul className="mt-3 space-y-2 text-blue-100/90">
-              <li><a href="#" className="hover:text-white">Privacy Policy</a></li>
-              <li><a href="#" className="hover:text-white">Terms of Service</a></li>
-              <li><a href="#" className="hover:text-white">Cookies</a></li>
-            </ul>
-          </div>
-          <div>
-            <h4 className="text-sm font-semibold uppercase tracking-wider text-blue-200">Support</h4>
-            <ul className="mt-3 space-y-2 text-blue-100/90">
-              <li><a href="#" className="hover:text-white">Help Centre</a></li>
-              <li><a href="#" className="hover:text-white">Status</a></li>
-              <li><a href="#" className="hover:text-white">Security</a></li>
-            </ul>
-          </div>
+          {[
+            { title: 'Company', links: ['About', 'Careers', 'Contact'] },
+            { title: 'Legal', links: ['Privacy Policy', 'Terms of Service', 'Cookies'] },
+            { title: 'Support', links: ['Help Centre', 'Status', 'Security'] },
+          ].map((col, i) => (
+            <motion.div
+              key={col.title}
+              initial={{ opacity: 0, y: 8 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.45, delay: i * 0.05 }}
+            >
+              <h4 className="text-sm font-semibold uppercase tracking-wider text-blue-200">{col.title}</h4>
+              <ul className="mt-3 space-y-2 text-blue-100/90">
+                {col.links.map((l) => (
+                  <li key={l}><a href="#" className="hover:text-white">{l}</a></li>
+                ))}
+              </ul>
+            </motion.div>
+          ))}
         </div>
-        <div className="mt-10 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-6 text-sm text-blue-200/80 sm:flex-row">
+        <motion.div
+          className="mt-10 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-6 text-sm text-blue-200/80 sm:flex-row"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
           <p>© {new Date().getFullYear()} LandlordLink. All rights reserved.</p>
           <p className="text-blue-200/60">Made for UK landlords & property managers.</p>
-        </div>
+        </motion.div>
       </div>
     </footer>
   )

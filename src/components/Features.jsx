@@ -1,5 +1,6 @@
 import React from 'react'
-import { Home, Users2, PoundSterling, CreditCard, Wrench, Hammer, BarChart3, PieChart, ShieldCheck, FileText, KeyRound } from 'lucide-react'
+import { Home, Users2, PoundSterling, Wrench, BarChart3, ShieldCheck, KeyRound } from 'lucide-react'
+import { motion } from 'framer-motion'
 
 const features = [
   {
@@ -44,18 +45,41 @@ function Features() {
     <section className="relative bg-slate-950 py-20 text-white">
       <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_center,rgba(59,130,246,0.12),transparent_60%)]" />
       <div className="relative mx-auto max-w-6xl px-6">
-        <h2 className="text-3xl font-bold">Key Features</h2>
-        <p className="mt-2 text-blue-200/80">Built for UK landlords and property managers.</p>
+        <motion.h2
+          className="text-3xl font-bold"
+          initial={{ opacity: 0, y: 8 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+        >
+          Key Features
+        </motion.h2>
+        <motion.p
+          className="mt-2 text-blue-200/80"
+          initial={{ opacity: 0, y: 8 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.55, delay: 0.05 }}
+        >
+          Built for UK landlords and property managers.
+        </motion.p>
 
         <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {features.map(({ title, desc, Icon }) => (
-            <div key={title} className="group rounded-2xl border border-white/10 bg-white/5 p-6 transition hover:bg-white/10">
+          {features.map(({ title, desc, Icon }, i) => (
+            <motion.div
+              key={title}
+              className="group rounded-2xl border border-white/10 bg-white/5 p-6 transition hover:bg-white/10"
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.5, delay: i * 0.05 }}
+            >
               <div className="mb-4 inline-flex rounded-xl bg-blue-500/15 p-3 ring-1 ring-blue-400/20">
                 <Icon className="h-6 w-6 text-blue-300" />
               </div>
               <h3 className="text-xl font-semibold">{title}</h3>
               <p className="mt-2 text-blue-100/90">{desc}</p>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
